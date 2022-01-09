@@ -5,8 +5,11 @@
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
     <div class="container">
-        <h2 class="title-page">Our Store</h2>
-
+        {% if 'search' in request.path %}
+            <h2 class="title-page">Search Result</h2>
+        {% else %}
+            <h2 class="title-page">Our Store</h2>
+        {% endif %}
     </div> <!-- container //  -->
 </section>
 
@@ -128,30 +131,35 @@
 
                 <div class="row">
                     
-                    {% for product in products %}
+                    {% if products %}
+
+                        {% for product in products %}          
+                            <div class="col-md-4">
+                                <figure class="card card-product-grid">
+                                    <a href="{% url 'store:product_detail' product.category.slug product.slug %}" class="img-wrap"> <img src="{{product.images.url}}">
+                                        <div class="img-wrap">
+
+                                            <img src="{{product.images.url}}">
+
+                                        </div> <!-- img-wrap.// -->
+                                    </a>
+                                    <figcaption class="info-wrap">
+                                        <div class="fix-height">
+                                            <a href="{% url 'store:product_detail' product.category.slug product.slug %}"  class="title">{{product.product_name}}</a>
+                                            <div class="price-wrap mt-2">
+                                                <span class="price">${{product.price}}</span>
+                                                <!-- <del class="price-old">$1980</del> -->
+                                            </div> <!-- price-wrap.// -->
+                                        </div>
+                                        <a href="{% url 'store:product_detail' product.category.slug product.slug %}" class="btn btn-block btn-primary">View Details </a>
+                                    </figcaption>
+                                </figure>
+                            </div> 
+                        {% endfor %}
+                    {% else %}
+                            <h2>No Result Found</h2>
+                    {% endif %}
                         
-                    <div class="col-md-4">
-                        <figure class="card card-product-grid">
-                            <a href="{% url 'store:product_detail' product.category.slug product.slug %}" class="img-wrap"> <img src="{{product.images.url}}">
-                                <div class="img-wrap">
-
-                                    <img src="{{product.images.url}}">
-
-                                </div> <!-- img-wrap.// -->
-                            </a>
-                            <figcaption class="info-wrap">
-                                <div class="fix-height">
-                                    <a href="{% url 'store:product_detail' product.category.slug product.slug %}"  class="title">{{product.product_name}}</a>
-                                    <div class="price-wrap mt-2">
-                                        <span class="price">${{product.price}}</span>
-                                        <!-- <del class="price-old">$1980</del> -->
-                                    </div> <!-- price-wrap.// -->
-                                </div>
-                                <a href="{% url 'store:product_detail' product.category.slug product.slug %}" class="btn btn-block btn-primary">View Details </a>
-                            </figcaption>
-                        </figure>
-                    </div> 
-                    {% endfor %}
                         
 
                    

@@ -43,13 +43,14 @@
                             <a class="dropdown-item" href="{% url 'store:products_by_category' category.slug %}">{{category.category_name}}</a>
                         {% endfor %}
                     </div>
-                </div>  <!-- category-wrap.// -->
-            </div> <!-- col.// -->
+                </div>  
+            </div> 
+            <!-- Search -->
             <a href="{% url 'store:store' %}" class="btn btn-outline-primary">Store</a>
             <div class="col-lg  col-md-6 col-sm-12 col">
-                <form action="#" class="search">
+                <form action="{% url 'store:search' %}" class="search" method="get">
                     <div class="input-group w-100">
-                        <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+                        <input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword">
                         
                         <div class="input-group-append">
                           <button class="btn btn-primary" type="submit">
