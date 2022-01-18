@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'carts',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -144,7 +145,7 @@ MESSAGE_TAGS = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'radioboxmail@gmail.com'
-EMAIL_HOST_PASSWORD = 'radioboxsaji@159315587'
+EMAIL_HOST_PASSWORD = 'radioboxsaji@15587//@@9$'
 EMAIL_USE_TLS = True
 
 
