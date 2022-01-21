@@ -28,6 +28,18 @@
 
 <!-- custom javascript -->
 <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
+
+<!-- Jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.thumb a').click(function(e){
+            e.preventDefault()
+            $('.MainImage img').attr('src',$(this).attr("href"));
+        })
+    })
+</script>
+
     <!-- Include the PayPal JavaScript SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AeG47tx6Q_Z0STsmqBnnqR0syVB9jGUE9bvFK7XxPcNyEmUOjuAyEPaREefF90w-DTnC3HxaUMYF21I8&currency=USD"></script>
 <script type="text/javascript">

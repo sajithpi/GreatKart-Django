@@ -2,6 +2,7 @@ from datetime import date
 from email import message
 from itertools import product
 from math import prod
+import re
 from django.contrib import messages
 from django.core import paginator
 from django.http import request
@@ -12,7 +13,7 @@ from carts.models import CartItem
 from orders.models import OrderProduct
 from store import forms
 from store.forms import ReviewForm
-from .models import Category, ReviewRating
+from .models import Category, ProductGallery, ReviewRating, Variation
 from store.models import Product
 from carts.views import get_cart_id
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -57,19 +58,27 @@ def product_detail(request,category_slug,product_slug):
         
     except Exception as e:
         raise e
+        
+        #Getting Product Image
+
+    product_gallery = ProductGallery.objects.filter(product_id = single_product_detail.id)
     if request.user.is_authenticated:
         try:
             orderedProduct = OrderProduct.objects.filter(user = request.user,product__id = single_product_detail.id ).exists()
-            orderedProduct = None
+           
         except OrderProduct.DoesNotExist:
             orderedProduct = None
     else:
         orderedProduct = None
+        
+
+
     context = {
         'single_product' : single_product_detail,
         'in_cart' : in_cart,
         'ordered_product' : orderedProduct,
         'product_reviews' : product_reviews,
+        'product_gallery' : product_gallery,
     }
     return render(request,'store/product_detail.html',context)
 
@@ -91,6 +100,39 @@ def searchProduct(request):
         }
 
     return render(request,'store/store.html',context)
+
+def product_detailed_search(request):
+    if request.method == 'POST':
+        product_category = request.POST['products_by_category']
+        product_size = request.POST['size']
+        product_minimum_price = request.POST['minimum_price']
+        product_maximum_price = request.POST['maximum_price']
+       
+        print("product_size:",product_size)
+        if product_size == 'All Products':
+            pass
+        else:
+            products = Product.objects.filter(category__slug = product_category)
+            variation_categories = Variation.objects.filter(variation_value = product_size,product__category__slug = product_category)
+            for categories in variation_categories:
+                print("products in catefories:",categories.product.category.slug)
+            paginator = Paginator(variation_categories,6)
+            page = request.GET.get('page')
+            paged_products = paginator.get_page(page)
+            product_count = products.count()
+
+            product_count = Product.objects.all().count()
+            context = {
+                'products' : paged_products,
+                'product_count' : product_count,
+                'product_category' : product_category,
+            }
+
+        print("product_category:",product_category)
+        print("product_minimum_price:",product_minimum_price)
+        print("product_maximum_price:",product_maximum_price)
+
+    return render(request,"store/product_detailed_search.html",context)
 
 def SubmitReview(request,product_id):
     url = request.META.get('HTTP_REFERER')

@@ -40,7 +40,7 @@
                                             {% if product_category %}
                                                 <input type="radio" name="products_by_category" value="All Products" >
                                             {% else %}
-                                            <input type="radio" name="products_by_category" value="All Products" checked >
+                                            <input type="radio" name="products_by_category" value="All Products" checked>
                                             {% endif %}
                                             
                                             <span class="btn btn-light"> All Products </span>
@@ -52,12 +52,12 @@
                                                 
                                             {% if product_category == category.slug %}
                                                 <label class="checkbox-btn">
-                                                    <input type="radio" name="products_by_category" value="{{category.slug}}" checked required>
+                                                    <input type="radio" name="products_by_category" value="{{category.slug}}" checked>
                                                     <span class="btn btn-light"> {{category.category_name}} </span>
                                                 </label>
                                             {% else %}
                                                 <label class="checkbox-btn">
-                                                    <input type="radio" name="products_by_category" value="{{category.slug}}" required>
+                                                    <input type="radio" name="products_by_category" value="{{category.slug}}">
                                                     <span class="btn btn-light"> {{category.category_name}} </span>
                                                 </label>
                                             {% endif %}
@@ -80,7 +80,7 @@
                             </header>
                             <div class="filter-content collapse show" id="collapse_4" >
                                 <div class="card-body">
-                                    <label class="checkbox-btn">
+                                    <label class="checkbox-btn" >
                                         <input type="radio" name="size" value="S" required>
                                         <span class="btn btn-light"> S </span>
                                     </label>
@@ -96,7 +96,7 @@
                                     </label>
 
                                     <label class="checkbox-btn">
-                                        <input type="radio" name="size" value="XXL" required>
+                                        <input type="radio" name="size" value="XXL" required >
                                         <span class="btn btn-light"> XXL </span>
                                     </label>
                                 </div><!-- card-body.// -->
@@ -117,7 +117,7 @@
                                         <div class="form-group col-md-6">
                                             <label>Min</label>
                                             <!-- <input class="form-control" placeholder="$0" type="number"> -->
-                                            <select class="mr-2 form-control" name="minimum_price">
+                                            <select class="mr-2 form-control" name="minimum_price" required>
                                                 <option value="0">$0</option>
                                                 <option value="50">$50</option>
                                                 <option value="100">$100</option>
@@ -163,22 +163,22 @@
                     
                     {% if products %}
 
-                        {% for product in products %}          
+                        {% for product_variation in products %}          
                             <div class="col-md-4">
                                 <figure class="card card-product-grid">
-                                    <a href="{% url 'store:product_detail' product.category.slug product.slug %}" class="img-wrap"> <img src="{{product.images.url}}">
+                                    <a href="{% url 'store:product_detail' product_variation.product.category.slug product_variation.product.slug %}" class="img-wrap"> <img src="{{product_variation.product.images.url}}">
                                         <div class="img-wrap">
 
-                                            <img src="{{product.images.url}}">
+                                            <img src="{{product_variation.product.images.url}}">
 
                                         </div> <!-- img-wrap.// -->
                                     </a>
                                     
                                     <figcaption class="info-wrap">
                                         <div class="fix-height">
-                                            <a href="{% url 'store:product_detail' product.category.slug product.slug %}"  class="title">{{product.product_name}}</a>
+                                            <a href="{% url 'store:product_detail' product_variation.product.category.slug  product_variation.product.slug %}"  class="title">{{product_variation.product.product_name}}</a>
                                             <div class="price-wrap mt-2">
-                                                <span class="price">${{product.price}}</span>
+                                                <span class="price">${{product_variation.product.price}}</span>
                                                 <!-- <del class="price-old">$1980</del> -->
                                             </div> <!-- price-wrap.// -->
                                             <div class="rating-star">
@@ -189,11 +189,11 @@
                                                     <i class="fa fa-star{% if product.avgReview < 3.5 %}-o{% elif product.avgReview >= 3.5 and product.avgReview < 4 %}-half-o{% endif %}" aria-hidden="true"></i>
                                                     <i class="fa fa-star{% if product.avgReview < 4.5 %}-o{% elif product.avgReview >= 4.5 and product.avgReview < 5 %}-half-o{% endif %}" aria-hidden="true"></i>
                                                 </span>
-                                                <span class="text-sm"><small>{{product.countReviews}} Reviews</small></span>
+                                                <span class="text-sm"><small>{{product_variation.product.countReviews}} Reviews</small></span>
                                             </div>
                                         </div>
                                        
-                                        <a href="{% url 'store:product_detail' product.category.slug product.slug %}" class="btn btn-block btn-primary">View Details </a>
+                                        <a href="{% url 'store:product_detail' product_variation.product.category.slug  product_variation.product.slug %}" class="btn btn-block btn-primary">View Details </a>
                                     </figcaption>
                                 </figure>
                             </div> 
