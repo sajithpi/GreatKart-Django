@@ -33,8 +33,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['greatkart-shopping.herokuapp']
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -97,25 +97,15 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'd8dguh8vnkr9al',
-        'USER': 'recmvhbwlejfxe',
-        'PASSWORD': '56a4ba705ebc966e5147ff3a17aef1a44480734732fde5d4034c09ac335ddc9c',
-        'HOST': 'ec2-52-201-124-168.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
