@@ -141,10 +141,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR /'static'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# STATICFILES_DIRS = [
-#     'greatkart/static',
-# ]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [
+    'greatkart/static',
+]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Media file configuration
