@@ -18,7 +18,6 @@ from pathlib import Path
 import django
 from decouple import config
 import os
-import django_heroku
 import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -171,4 +170,6 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals())
+# Configure Django App for Heroku.
+import django_on_heroku
+django_on_heroku.settings(locals())
