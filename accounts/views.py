@@ -185,12 +185,12 @@ def dashboard(request):
         orders = Order.objects.order_by("-created_at").filter(user_id = request.user.id,is_ordered = True)
         user_profile = UserProfile.objects.get(user_id = request.user.id)
         orders_count = orders.count()
+        context = {
+            'orders_count' : orders_count,
+            'user_profile' : user_profile,
+        }
     except (Order.DoesNotExist) :
         orders_count = 0
-    context = {
-        'orders_count' : orders_count,
-        'user_profile' : user_profile,
-    }
     return render(request,'accounts/dashboard.html',context)
 
 @login_required(login_url='accounts:login')
