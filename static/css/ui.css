@@ -318,13 +318,13 @@ article:after,
   transition: 0.5s;
 }
 
-.bg-pattern {
-  /* ../images/banners/bg-pattern.svg */
+/* .bg-pattern {
+ 
   background-image: url(../images/banners/cover.jpg), linear-gradient(135deg, #3167eb, #545454);
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
   background-position: 0px 0px, 50% 50%;
-}
+} */
 
 .bg-img {
   overflow: hidden;
