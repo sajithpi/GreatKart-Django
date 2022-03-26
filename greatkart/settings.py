@@ -18,7 +18,6 @@ from pathlib import Path
 import django
 from decouple import config
 import os
-import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -62,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+  
 ]
 
 SESSION_EXPIRE_SECONDS = 3600  # 1 hour
@@ -145,7 +144,7 @@ STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
     'greatkart/static',
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 # Media file configuration
 MEDIA_URL = 'media/'
@@ -170,6 +169,3 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configure Django App for Heroku.
-import django_on_heroku
-django_on_heroku.settings(locals())
